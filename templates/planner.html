@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Health Planner | MedInsure AI</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: 
+        linear-gradient(rgba(255,255,255, 0.1), rgba(255,255,255,0.92)), 
+        url("/static/images/background.png") no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    header {
+      width: 100%;
+      background: rgba(255,255,255,0.9);
+      padding: 15px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      position: fixed;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 600;
+      color: #2563eb;
+    }
+
+    nav a {
+      margin: 0 12px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #2563eb;
+    }
+
+    .container {
+      margin-top: 120px;
+      width: 90%;
+      max-width: 900px;
+      background: rgba(255,255,255,0.85);
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      padding: 40px;
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      text-align: center;
+      color: #004aad;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #1d4ed8;
+      margin-top: 30px;
+      border-left: 5px solid #2563eb;
+      padding-left: 10px;
+    }
+
+    p {
+      line-height: 1.6;
+      color: #444;
+    }
+
+    select, input[type="range"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      background-color: rgba(255,255,255,0.9);
+    }
+
+    .goal-section, .habit-tracker, .tips-section, .stress-section, .disclaimer, .resources {
+      margin-top: 30px;
+    }
+
+    .habit-tracker label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    .progress-bar {
+      height: 12px;
+      width: 100%;
+      background: #eee;
+      border-radius: 6px;
+      margin-top: 10px;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #2563eb, #00bfff);
+      transition: width 0.3s ease;
+    }
+
+    .tip-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      padding: 20px;
+      width: 250px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 18px rgba(37,99,235,0.3);
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #2563eb, #00bfff);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      box-shadow: 0 0 15px rgba(37,99,235,0.4);
+      transform: translateY(-3px);
+    }
+
+    .disclaimer {
+      background: rgba(255,255,255,0.95);
+      padding: 20px;
+      border-radius: 10px;
+      border-left: 5px solid #ff4444;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">MedInsure AI</div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/new">Predict</a>
+    <a href="/tests">Health Tests</a>
+    <a href="/score">Health Score</a>
+    <a href="/planner">Health Planner</a>
+    <a href="/plans">Plans</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h1>🗓️ Your Personalized Health Planner</h1>
+  <p>Small daily changes create long-term results. Plan your habits, track progress, and discover actionable tips based on your health goals.</p>
+
+  <div class="goal-section">
+    <h2>🎯 Choose Your Goal</h2>
+    <select id="goal">
+      <option value="none">Select your goal</option>
+      <option value="weight">Weight Management</option>
+      <option value="stress">Stress Reduction</option>
+      <option value="sleep">Better Sleep</option>
+      <option value="heart">Heart Health</option>
+      <option value="overall">Overall Wellness</option>
+    </select>
+    <div id="goal-tips" class="tip-cards" style="margin-top:20px;"></div>
+  </div>
+
+  <div class="habit-tracker">
+    <h2>✅ Daily Habit Tracker</h2>
+    <label><input type="checkbox" class="habit"> Drink 8 glasses of water</label>
+    <label><input type="checkbox" class="habit"> 30 minutes of walk</label>
+    <label><input type="checkbox" class="habit"> 7+ hours of sleep</label>
+    <label><input type="checkbox" class="habit"> Avoid junk food today</label>
+    <div class="progress-bar"><div class="progress"></div></div>
+  </div>
+
+  <div class="stress-section">
+    <h2>🧘 Stress Level Check</h2>
+    <label for="stressRange">Rate your stress (0 = calm, 10 = stressed):</label>
+    <input type="range" id="stressRange" min="0" max="10" />
+    <p id="stressMessage">Move the slider to see your message.</p>
+  </div>
+
+  <div class="tips-section">
+    <h2>💡 General Wellness Tips</h2>
+    <div class="tip-cards">
+      <div class="card">🥗 Eat balanced meals rich in fiber and protein.</div>
+      <div class="card">🚶 Stay active — aim for 30 minutes of movement daily.</div>
+      <div class="card">💧 Stay hydrated — water is your best medicine.</div>
+      <div class="card">😴 Maintain consistent sleep routines.</div>
+      <div class="card">🧠 Practice mindfulness for mental clarity.</div>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <h3>⚠️ Disclaimer</h3>
+    <p>
+      This health planner provides general lifestyle guidance and is not a substitute for professional medical advice. 
+      Always consult your healthcare provider for diagnosis or treatment of medical conditions. 
+      The suggestions here are for informational purposes and meant to support healthy living.
+    </p>
+  </div>
+
+  <div class="resources">
+    <h2>🌐 Helpful Resources</h2>
+    <ul>
+      <li><a href="https://www.who.int/" target="_blank">World Health Organization (WHO)</a></li>
+      <li><a href="https://www.healthline.com/nutrition" target="_blank">Healthline Nutrition Guides</a></li>
+      <li><a href="https://www.sleepfoundation.org/" target="_blank">Sleep Foundation</a></li>
+    </ul>
+  </div>
+
+  <footer>© 2025 MedInsure AI | Designed by Jasmeen Kaur</footer>
+</div>
+
+<script>
+  // Habit tracker progress bar
+  const habits = document.querySelectorAll('.habit');
+  const progress = document.querySelector('.progress');
+
+  habits.forEach(habit => {
+    habit.addEventListener('change', () => {
+      const checkedCount = document.querySelectorAll('.habit:checked').length;
+      const percentage = (checkedCount / habits.length) * 100;
+      progress.style.width = percentage + '%';
+    });
+  });
+
+  // Stress slider feedback
+  const stressRange = document.getElementById('stressRange');
+  const stressMessage = document.getElementById('stressMessage');
+  stressRange.addEventListener('input', () => {
+    const val = stressRange.value;
+    if (val < 4) stressMessage.textContent = "You're doing great! Keep up the calm energy.";
+    else if (val < 7) stressMessage.textContent = "Take a short break, maybe some breathing exercises.";
+    else stressMessage.textContent = "Consider meditation, a walk, or talking to someone — your mind matters.";
+  });
+
+  // Goal-based tips
+  const goalSelect = document.getElementById('goal');
+  const goalTips = document.getElementById('goal-tips');
+  const tips = {
+    weight: ["🍎 Track calories mindfully.", "🚶 Walk 10,000 steps daily.", "🥗 Choose smaller portions."],
+    stress: ["🧘 Try deep breathing or yoga.", "📱 Reduce screen time before bed.", "🎵 Listen to calming music."],
+    sleep: ["🌙 Keep a consistent bedtime.", "📵 No screens 30 mins before sleep.", "☕ Avoid caffeine after 6 PM."],
+    heart: ["❤️ Limit salt & saturated fats.", "🏃 Exercise 5 times a week.", "🩺 Regular checkups are vital."],
+    overall: ["🥦 Eat colorful meals.", "😌 Manage your stress daily.", "💧 Stay hydrated throughout the day."]
+  };
+  goalSelect.addEventListener('change', () => {
+    const selected = goalSelect.value;
+    goalTips.innerHTML = selected === "none" ? "" : tips[selected].map(t => `<div class='card'>${t}</div>`).join('');
+  });
+</script>
+</body>
+</html>

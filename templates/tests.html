@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Tests</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: 
+        linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)), 
+        url("/static/images/background.png") no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* HEADER CARD */
+    .header-card {
+      background: rgba(255,255,255,0.88);
+      margin-top: 60px;
+      padding: 40px 50px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(8px);
+      max-width: 850px;
+      animation: fadeInDown 0.8s ease;
+    }
+
+    .header-card h1 {
+      color: #004aad;
+      margin-bottom: 15px;
+      font-size: 2.4rem;
+    }
+
+    .header-card p {
+      color: #444;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    /* TEST CARDS */
+    .tests-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 50px auto 30px;
+      gap: 30px;
+      max-width: 1000px;
+      padding: 0 20px;
+      animation: fadeIn 1s ease;
+    }
+
+    .test-card {
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 15px;
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      padding: 30px;
+      text-align: center;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      backdrop-filter: blur(8px);
+      cursor: pointer;
+    }
+
+    .test-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 35px rgba(0, 110, 255, 0.3);
+    }
+
+    .test-card h2 {
+      color: #004aad;
+      margin-bottom: 10px;
+    }
+
+    .test-card p {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .test-card a {
+      text-decoration: none;
+      background: linear-gradient(90deg, #007bff, #00bfff);
+      color: white;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-weight: bold;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    .test-card a:hover {
+      background: linear-gradient(90deg, #0056b3, #0095cc);
+      box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+    }
+
+    /* HOW IT WORKS SECTION */
+    .info-section {
+      background: rgba(255,255,255,0.88);
+      padding: 30px 40px;
+      border-radius: 15px;
+      max-width: 900px;
+      margin: 40px auto;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(6px);
+      animation: fadeIn 1.2s ease;
+    }
+
+    .info-section h3 {
+      color: #004aad;
+      text-align: center;
+      margin-bottom: 15px;
+      font-size: 1.6rem;
+    }
+
+    .info-section p {
+      color: #444;
+      font-size: 1rem;
+      line-height: 1.7;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .info-section ul {
+      list-style-type: disc;
+      color: #333;
+      line-height: 1.8;
+      max-width: 700px;
+      margin: 0 auto;
+      padding-left: 25px;
+    }
+
+    /* DISCLAIMER */
+    .disclaimer {
+      background: rgba(255,255,255,0.9);
+      margin: 40px auto;
+      padding: 30px 40px;
+      border-radius: 15px;
+      max-width: 900px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(6px);
+      animation: fadeIn 1.4s ease;
+    }
+
+    .disclaimer h3 {
+      color: #004aad;
+      margin-bottom: 15px;
+      text-align: center;
+      font-size: 1.6rem;
+    }
+
+    .disclaimer ul {
+      list-style-type: disc;
+      padding-left: 25px;
+      color: #333;
+      line-height: 1.8;
+    }
+
+    footer {
+      margin: 40px 0 20px;
+      font-size: 0.9rem;
+      color: #444;
+      text-align: center;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-card">
+    <h1>Health Risk Prediction Tests</h1>
+    <p>
+      Assess your risk for common health conditions using data-driven prediction models.  
+      These tools are designed to help you understand your body better and take preventive action early.  
+      Select a test below to get started — your privacy is completely protected.
+    </p>
+  </div>
+
+  <div class="tests-section">
+    <div class="test-card">
+      <h2>Diabetes Risk Test</h2>
+      <p>Estimate your risk of diabetes using BMI, glucose level, and lifestyle indicators.</p>
+      <a href="{{ url_for('diabetes_page') }}">Take Test</a>
+    </div>
+
+    <div class="test-card">
+      <h2>Hypertension Risk Test</h2>
+      <p>Analyze your risk of high blood pressure using your age, diet, and medical history.</p>
+      <a href="{{ url_for('hypertension_page') }}">Take Test</a>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <h3>How It Works</h3>
+    <p>
+      These tests are designed using healthcare data models that analyze multiple lifestyle and biological parameters.
+      You simply fill in your information, and the system provides a risk assessment based on predictive algorithms.
+    </p>
+    <ul>
+      <li>Completely free and confidential.</li>
+      <li>No login or registration required.</li>
+      <li>Results are instant and based on your inputs.</li>
+      <li>Helps in early identification and prevention planning.</li>
+    </ul>
+  </div>
+
+  <div class="disclaimer">
+    <h3>Disclaimer</h3>
+    <ul>
+      <li>These tools are for informational purposes only and do not replace medical consultation.</li>
+      <li>Always seek advice from a qualified healthcare provider for diagnosis or treatment.</li>
+      <li>Individual health conditions may vary — these tests provide an estimate, not a certainty.</li>
+      <li>Results should not be used as the sole basis for health-related decisions.</li>
+      <li>All information entered remains private and is not stored beyond your session.</li>
+      <li>If you experience symptoms or health issues, contact a doctor immediately.</li>
+    </ul>
+  </div>
+
+  <footer>
+    © 2025 Health Predictor | For awareness and early prevention
+  </footer>
+  <script>
+    document.getElementById("exploreBtn").addEventListener("click", () => {
+    window.location.href = "/planner";
+});
+  </script>
+
+</body>
+</html>

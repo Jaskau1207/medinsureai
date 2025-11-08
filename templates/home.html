@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medical Insurance Predictor | Home</title>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background: #f8fbff;
+        color: #1b1b1b;
+        overflow-x: hidden;
+    }
+
+    /* Navbar */
+    header {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        z-index: 10;
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 60px;
+        backdrop-filter: blur(10px);
+    }
+
+    .logo {
+        font-size: 24px;
+        font-weight: 600;
+        color: #2563eb;
+        letter-spacing: 0.5px;
+    }
+
+    nav a {
+        color: #333;
+        margin: 0 15px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.3s;
+    }
+
+    nav a:hover {
+        color: #2563eb;
+    }
+
+    /* Hero Section */
+    .hero {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: left;
+        padding: 0 60px;
+        background: url("/static/images/background.png") no-repeat center center/cover;
+        position: relative;
+    }
+
+    .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.8); /* soft white veil for readability */
+        z-index: 0;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 600px;
+        background: rgba(255,255,255,0.7);
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        backdrop-filter: blur(10px);
+    }
+
+    .hero h1 {
+        font-size: 52px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #1e3a8a;
+        line-height: 1.2;
+    }
+
+    .hero p {
+        font-size: 18px;
+        margin-bottom: 35px;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 14px 30px;
+        background: linear-gradient(90deg, #2563eb, #1d4ed8);
+        border-radius: 10px;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    .btn:hover {
+        box-shadow: 0 0 15px rgba(37,99,235,0.4);
+        transform: translateY(-2px);
+    }
+
+    /* Features Section */
+    .features {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 80px 20px;
+        background: #f0f6ff;
+    }
+
+    .feature-card {
+        width: 250px;
+        margin: 20px;
+        padding: 25px;
+        border-radius: 15px;
+        background: #ffffff;
+        border: 1px solid #e3eaf5;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        transition: 0.3s;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 18px rgba(37,99,235,0.2);
+    }
+
+    .feature-card h3 {
+        font-size: 20px;
+        color: #1d4ed8;
+        margin-bottom: 10px;
+    }
+
+    .feature-card p {
+        font-size: 14px;
+        color: #4b5563;
+        line-height: 1.5;
+    }
+
+    footer {
+        text-align: center;
+        padding: 25px;
+        background: #ffffff;
+        color: #6b7280;
+        font-size: 14px;
+        border-top: 1px solid #e5e7eb;
+        letter-spacing: 0.5px;
+    }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">MedInsure AI</div>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/new">Predict</a>
+        <a href="/tests">Health Tests</a>
+        <a href="/score">Health Score</a>
+        <a href="/planner">Health Planner</a>
+        <a href="/plans">Plans</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Predict. Plan. Protect.</h1>
+        <p>Get accurate medical insurance cost predictions based on your health, lifestyle, and habits. 
+        Access health tests, track your score, and explore personalized plans — all in one place.</p>
+        <a href="/new" class="btn">Start Prediction</a>
+    </div>
+</section>
+
+<section class="features">
+    <div class="feature-card">
+        <h3>💰 Cost Prediction</h3>
+        <p>Estimate your insurance premium using advanced ML models tailored to your health profile.</p>
+    </div>
+    <div class="feature-card">
+        <h3>🧬 Health Tests</h3>
+        <p>Check your likelihood of conditions like Hypertension or Diabetes before you buy a plan.</p>
+    </div>
+    <div class="feature-card">
+        <h3>📊 Health Score</h3>
+        <p>Get a personalized score based on your habits, age, and medical test results.</p>
+    </div>
+    <div class="feature-card">
+        <h3>🗓️ Health Planner</h3>
+        <p>Track your health progress and follow suggested plans to maintain a lower premium.</p>
+    </div>
+    <div class="feature-card">
+        <h3>🏥 Insurance Plans</h3>
+        <p>Explore recommended plans and compare coverages that best fit your health and budget.</p>
+    </div>
+</section>
+
+<footer>
+    © 2025 MedInsure AI | Designed by Jasmeen Kaur
+</footer>
+
+</body>
+</html>

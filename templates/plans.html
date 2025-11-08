@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Insurance Plans</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background:
+        linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.85)),
+        url("/static/images/background.png") no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 40px 20px;
+    }
+
+    header {
+      background: rgba(255,255,255,0.85);
+      border-radius: 15px;
+      padding: 25px 40px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      backdrop-filter: blur(8px);
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    header h1 {
+      color: #004aad;
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .plan-card {
+      background: #ffffffcc;
+      border-radius: 15px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(8px);
+      width: 320px;
+      padding: 30px;
+      text-align: left;
+      transition: all 0.3s ease;
+    }
+
+    .plan-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      border: 1px solid #007bff55;
+    }
+
+    .plan-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #004aad;
+      margin-bottom: 10px;
+    }
+
+    .plan-desc {
+      font-size: 0.95rem;
+      color: #333;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    .plan-features {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 15px;
+    }
+
+    .plan-features li {
+      background: rgba(240, 248, 255, 0.8);
+      margin: 6px 0;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #222;
+    }
+
+    .plan-link {
+      display: block;
+      text-align: center;
+      background: linear-gradient(90deg, #007bff, #00bfff);
+      color: white;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .plan-link:hover {
+      background: linear-gradient(90deg, #0056b3, #0095cc);
+    }
+
+    .disclaimer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #333;
+      background: #ffffffcc;
+      backdrop-filter: blur(6px);
+      border-radius: 12px;
+      padding: 15px 25px;
+      max-width: 800px;
+      margin-top: 40px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Recommended Health Insurance Plans</h1>
+    <p style="color:#333; margin-top:10px;">
+      Explore trusted insurance options that fit your health and lifestyle.
+    </p>
+  </header>
+
+  <div class="container">
+    <div class="plan-card">
+      <div class="plan-title">Star Health – Family Health Optima</div>
+      <div class="plan-desc">
+        Affordable family floater plan covering all members under a single sum insured.
+      </div>
+      <ul class="plan-features">
+        <li>Coverage up to ₹25 lakhs</li>
+        <li>Free health check-up annually</li>
+        <li>Newborn cover after 16 days</li>
+      </ul>
+      <a href="https://www.starhealth.in/health-insurance/family-health-optima" target="_blank" class="plan-link">View Plan</a>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-title">HDFC ERGO – Optima Restore</div>
+      <div class="plan-desc">
+        A plan with automatic restoration of the sum insured and lifetime renewability.
+      </div>
+      <ul class="plan-features">
+        <li>Sum insured restoration</li>
+        <li>Cashless treatments across 13,000+ hospitals</li>
+        <li>Pre and post-hospitalization cover</li>
+      </ul>
+      <a href="https://www.hdfcergo.com/health-insurance/optima-restore" target="_blank" class="plan-link">View Plan</a>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-title">Care Health – Care Advantage</div>
+      <div class="plan-desc">
+        Comprehensive coverage with high sum insured for individuals and families.
+      </div>
+      <ul class="plan-features">
+        <li>Coverage up to ₹1 crore</li>
+        <li>Annual health check-ups</li>
+        <li>Coverage for daycare treatments</li>
+      </ul>
+      <a href="https://www.careinsurance.com/" target="_blank" class="plan-link">View Plan</a>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-title">Max Bupa – Health Companion</div>
+      <div class="plan-desc">
+        Flexible plan with global coverage for emergencies and no room rent limits.
+      </div>
+      <ul class="plan-features">
+        <li>No room rent limits</li>
+        <li>Worldwide emergency cover</li>
+        <li>Renewable for lifetime</li>
+      </ul>
+      <a href="https://www.nivabupa.com/" target="_blank" class="plan-link">View Plan</a>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-title">Tata AIG – Medicare Premier</div>
+      <div class="plan-desc">
+        Premium plan offering wide network coverage and wellness benefits.
+      </div>
+      <ul class="plan-features">
+        <li>Sum insured up to ₹3 crore</li>
+        <li>Free preventive check-ups</li>
+        <li>Optional maternity cover</li>
+      </ul>
+      <a href="https://www.tataaig.com/health-insurance/medicare-premier" target="_blank" class="plan-link">View Plan</a>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    ⚠️ <b>Disclaimer:</b> The above plans and links are for informational purposes only.<br>
+    Always review policy terms and consult with certified insurance advisors before making any purchase.  
+    We do not endorse or sell any specific plan or provider.
+  </div>
+
+</body>
+</html>

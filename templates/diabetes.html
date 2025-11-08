@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diabetes Test Form</title>
+  <style>
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: 
+    linear-gradient(rgba(255,255,255,0.10), rgba(255,255,255,0.92)), 
+    url("/static/images/background.png") no-repeat center center fixed;
+  background-size: cover;
+  color: #333;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.form-container {
+  max-width: 700px;
+  margin: 60px auto;
+  background: #ffffffcc; /* semi-transparent white */
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px); /* adds soft blur on background */
+}
+
+h1 {
+  text-align: center;
+  color: #004aad;
+  margin-bottom: 25px;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: 600;
+  color: #222;
+}
+
+input[type="number"],
+input[type="text"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: rgba(255,255,255,0.9);
+}
+
+    .radio-group {
+      margin-top: 10px;
+    }
+
+    .radio-group label {
+      font-weight: normal;
+      margin-right: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(90deg, #007bff, #00bfff);
+      border: none;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 8px;
+      margin-top: 25px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #0056b3, #0095cc);
+    }
+
+    .divider {
+      margin: 25px 0;
+      border-top: 1px solid #ddd;
+    }
+
+      .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popup {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  animation: fadeIn 0.3s ease;
+}
+
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px; 
+}
+
+.buttons button {
+  margin: 0 10px;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Diabetes Test</h1>
+    <form id="diabetesForm" action="/diabetes" method="post">
+     <label>Gender:</label>
+<select name="gender" required>
+  <option value="0">Female</option>
+  <option value="1">Male</option>
+</select>
+
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" placeholder="Enter your age" required>
+
+      <div class="divider"></div>
+
+      <label>Do you have hypertension?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="hypertension" value="1"> Yes</label>
+        <label><input type="radio" name="hypertension" value="0"> No</label>
+        <label><input type="radio" name="hypertension" value="0"> Not sure</label>
+      </div>
+
+      <label>Do you have heart disease?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="heart_disease" value="1"> Yes</label>
+        <label><input type="radio" name="heart_disease" value="0"> No</label>
+        <label><input type="radio" name="heart_disease" value="0"> Not sure</label>
+      </div>
+
+      <label for="smoking">Smoking History:</label>
+      <select id="smoking" name="smoking_history">
+        <option value="">Select one</option>
+        <option value="4">Never</option>
+        <option value="3">Former smoker</option>
+        <option value="1">Current smoker</option>
+        <option value="2">Occasional</option>
+        <option value = "0">Prefer Not to Say</option>
+      </select>
+
+      <label for="bmi">BMI (Body Mass Index):</label>
+      <input type="number" id="bmi" name="bmi" placeholder="e.g., 24.5" step="0.1" required>
+
+      <label for="hba1c">HbA1c Level (%):</label>
+      <input type="number" id="hba1c" name="HbA1c_level" placeholder="e.g., 5.6" step="0.1" required>
+
+      <label for="blood_glucose">Blood Glucose Level (mg/dL):</label>
+      <input type="number" id="blood_glucose" name="blood_glucose_level" placeholder="e.g., 110" required>
+
+      <button type="submit">Check Diabetes Risk</button>
+    </form>
+  </div>
+
+  <div class="overlay" id="resultOverlay" style="display: none;">
+  <div class="popup">
+    <h3>Diabetes Risk</h3>
+    <hr>
+    <h4>Diabetes Risk: <span id="result"></span></h4>
+    <div class="buttons">
+      <button id="okayBtn" class="btn btn-success">Okay</button>
+      <button id="exploreBtn" class="btn btn-primary">Suggest Lifestyle Changes</button>
+    </div>
+  </div>
+</div>
+
+   <script>
+document.getElementById("diabetesForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // stop normal form submission
+
+    const formData = new FormData(this);
+
+    fetch("/diabetes", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Check for valid result from Flask
+        if (data.result) {
+            document.getElementById("result").innerText = data.result;
+        } else if (data.error) {
+            document.getElementById("result").innerText = "Error: " + data.error;
+        } else {
+            document.getElementById("result").innerText = "Unexpected response format.";
+        }
+
+        // Show popup AFTER receiving response
+        document.getElementById("resultOverlay").style.display = "flex";
+    })
+    .catch(error => {
+        console.error("Prediction error:", error);
+        alert("Something went wrong. Please try again.");
+    });
+});
+
+// Hide popup when "Okay" is clicked
+document.getElementById("okayBtn").addEventListener("click", () => {
+    document.getElementById("resultOverlay").style.display = "none";
+});
+
+// Navigate to planner page when "Suggest Lifestyle Changes" is clicked
+document.getElementById("exploreBtn").addEventListener("click", () => {
+    window.location.href = "/planner";
+});
+</script>
+
+</body>
+</html>

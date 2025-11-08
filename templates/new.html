@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Medical Insurance Predictor</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: url("/static/images/background.png") no-repeat center center/cover;
+      color: #222;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px 60px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      width: 600px;
+      max-width: 90%;
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      text-align: center;
+      color: #004b87;
+      margin-bottom: 25px;
+      font-size: 26px;
+    }
+
+    h2 {
+      color: #005a9e;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #e6eef7;
+      padding-bottom: 5px;
+      font-size: 20px;
+    }
+
+    label { display: block; margin: 12px 0; font-size: 15px; }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #cbd6e0;
+      border-radius: 6px;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    input:focus, select:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    .button-group { text-align: right; margin-top: 25px; }
+
+    button {
+      background: #007bff;
+      color: #fff;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 5px;
+      transition: 0.2s;
+    }
+
+    button:hover { background: #0056b3; }
+
+    .form-step { display: none; }
+    .form-step.active { display: block; }
+
+    .progress {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 25px;
+    }
+
+    .progress-step {
+      width: 30%;
+      height: 6px;
+      background: #d0e3f7;
+      border-radius: 3px;
+      position: relative;
+    }
+
+    .progress-step.active { background: #007bff; }
+
+    .progress-step::after {
+      content: attr(data-title);
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 13px;
+      color: #004b87;
+    }
+
+    /* === POPUP STYLES === */
+    .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popup {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  animation: fadeIn 0.3s ease;
+}
+
+.buttons {
+  margin-top: 20px;
+}
+
+.buttons button {
+  margin: 0 10px;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+  </style>
+</head>
+
+<body>
+  <div class="form-container">
+    <h1>Medical Insurance Predictor</h1>
+
+    <div class="progress">
+      <div class="progress-step active" data-title="Personal"></div>
+      <div class="progress-step" data-title="Health"></div>
+      <div class="progress-step" data-title="Lifestyle"></div>
+    </div>
+
+    <form id="multiStepForm" action="/new" method="post">
+      <!-- Step 1 -->
+      <section class="form-step active">
+        <h2>🧍‍♀️ Personal Details</h2>
+        <label>Name: <input type="text" required /></label>
+        <label>Age: <input type="number" required /></label>
+        <label>Gender:
+          <select>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label>Region: <input type="text" /></label>
+        <label>Occupation:
+          <select>
+            <option>Sedentary</option>
+            <option>Field Work</option>
+            <option>Labor-Intensive</option>
+          </select>
+        </label>
+        <label>Marital Status:
+          <select>
+            <option>Single</option>
+            <option>Married</option>
+            <option>Divorced</option>
+          </select>
+        </label>
+        <label>Number of Dependents: <input type="number" min="0" /></label>
+        <div class="button-group">
+          <button type="button" class="next">Next</button>
+        </div>
+      </section>
+
+      <!-- Step 2 -->
+      <section class="form-step">
+        <h2>🩺 Health Details</h2>
+        <label>BMI: <input type="number" name="bmi" step="0.1" /></label>
+        <label>Smoker:
+          <select name="smoker">
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </label>
+        <label>Diabetes:
+          <select name="diabetes">
+            <option>Yes</option>
+            <option>No</option>
+            <option>Not Sure (Book Test)</option>
+          </select>
+        </label>
+        <label>Hypertension:
+          <select name="hypertension">
+            <option>Yes</option>
+            <option>No</option>
+            <option>Not Sure (Book Test)</option>
+          </select>
+        </label>
+        <label>Cholesterol Level:
+          <select name="cholesterol">
+            <option>Normal</option>
+            <option>High</option>
+            <option>Not Sure</option>
+          </select>
+        </label>
+        <label>Allergies:
+          <input type="text" name="allergies" placeholder="If any" />
+        </label>
+        <label>Chronic Conditions:
+          <input type="text"  name="chronic" placeholder="Asthma, PCOS, Thyroid..." />
+        </label>
+        <label>Sleep Quality:
+          <select name="sleep">
+            <option>Good</option>
+            <option>Average</option>
+            <option>Poor</option>
+          </select>
+        </label>
+        <label>Diet Type:
+          <select name="diet">
+            <option>Veg</option>
+            <option>Non-Veg</option>
+            <option>Balanced</option>
+            <option>Junk-heavy</option>
+          </select>
+        </label>
+        <div class="button-group">
+          <button type="button" class="back">Back</button>
+          <button type="button" class="next">Next</button>
+        </div>
+      </section>
+
+      <!-- Step 3 -->
+      <section class="form-step">
+        <h2>🏥 Lifestyle & Insurance</h2>
+        <label>Exercise Frequency:
+          <select name="exercise">
+            <option>Regular</option>
+            <option>Sometimes</option>
+            <option>Rarely</option>
+          </select>
+        </label>
+        <label>Alcohol Consumption:
+          <select name="alcohol">
+            <option>Never</option>
+            <option>Occasionally</option>
+            <option>Frequently</option>
+          </select>
+        </label>
+        <label>Last Hospital Visit:
+          <input type="date" name="visit" />
+        </label>
+        <label>Regular Health Checkups:
+          <select name="checkups">
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </label>
+        <label>Average Sleep Duration (hours):
+          <input type="number" name="sleep_hours" min="0" max="24" />
+        </label>
+        <label>Stress Level:
+          <select name="stress">
+            <option>Low</option>
+            <option>Moderate</option>
+            <option>High</option>
+          </select>
+        </label>
+        <label>Do you have a personal doctor?
+          <select name="doctor">
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </label>
+        <label>Currently Insured?
+          <select name="insured">
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </label>
+        <label>Monthly Healthcare Budget:
+          <input type="number" name="budget" placeholder="in ₹" />
+        </label>
+        <label>Preferred Coverage Type:
+          <select name="coverage">
+            <option>Individual</option>
+            <option>Family</option>
+            <option>Senior</option>
+            <option>Critical Illness</option>
+          </select>
+        </label>
+        <div class="button-group">
+          <button type="button" class="back">Back</button>
+          <button type="submit" class="submit">Predict</button>
+        </div>
+      </section>
+    </form>
+  </div>
+<div class="overlay" id="resultOverlay" style="display: none;">
+  <div class="popup">
+    <h3>📊 Insurance Cost Prediction</h3>
+    <hr>
+    <h4>Total Monthly Insurance Cost: ₹<span id="totalCost"></span></h4>
+    <div class="buttons">
+      <button id="okayBtn" class="btn btn-success">Okay</button>
+      <button id="exploreBtn" class="btn btn-primary">Explore Plans</button>
+    </div>
+  </div>
+</div>
+  <script>
+    // --- FORM STEPPER ---
+    const formSteps = document.querySelectorAll(".form-step");
+    const nextBtns = document.querySelectorAll(".next");
+    const backBtns = document.querySelectorAll(".back");
+    const progressSteps = document.querySelectorAll(".progress-step");
+    let currentStep = 0;
+
+    function updateProgress() {
+      progressSteps.forEach((step, index) => {
+        step.classList.toggle("active", index <= currentStep);
+      });
+    }
+
+    nextBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        formSteps[currentStep].classList.remove("active");
+        currentStep++;
+        formSteps[currentStep].classList.add("active");
+        updateProgress();
+      });
+    });
+
+    backBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        formSteps[currentStep].classList.remove("active");
+        currentStep--;
+        formSteps[currentStep].classList.add("active");
+        updateProgress();
+      });
+    });
+
+    // --- FORM SUBMISSION HANDLER WITH POPUP ---
+    document.getElementById("multiStepForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // stop normal form submission
+
+    const formData = new FormData(this);
+
+    fetch("/new", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Fill popup values
+       
+        document.getElementById("totalCost").innerText = data.total;
+
+        // Show popup
+        document.getElementById("resultOverlay").style.display = "flex";
+    })
+    .catch(error => {
+        console.error("Prediction error:", error);
+        alert("Something went wrong. Please try again.");
+    });
+});
+
+// Hide popup when "Okay" is clicked
+document.getElementById("okayBtn").addEventListener("click", () => {
+    document.getElementById("resultOverlay").style.display = "none";
+});
+
+// Navigate to plans.html when "Explore Plans" is clicked
+document.getElementById("exploreBtn").addEventListener("click", () => {
+    window.location.href = "/plans";
+});
+  </script>
+</body>
+</html>
